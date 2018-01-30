@@ -2,7 +2,6 @@
 <?php
 $dirPath = './images';
 $listResult = '';
-$totalFileSize = 0;
 if (is_readable($dirPath) && is_dir($dirPath)) {
 $listResult = '';
 $listResult = '<table class="table table-bordered">'
@@ -16,7 +15,6 @@ $listResult = '<table class="table table-bordered">'
         if (file_exists($fullPath) && exif_imagetype($fullPath)) {
             $imageInfo = getimagesize($fullPath);
             $fileByteSize = filesize($fullPath);
-            $totalFileSize += $fileByteSize;
             $listResult .= '<tr>';
             $listResult .= '<td class="thumbnail"><img src = "' . $fullPath . '" alt="' . $val . '"></td>';
             $listResult .= '<td class="file-name">'. $val . '</td>';
@@ -26,7 +24,6 @@ $listResult = '<table class="table table-bordered">'
         }
     }
     $listResult .= '</tbody></table>';
-    $totalFileSize = '<p>Total image file size in "' . $dirPath . '": ' . number_format($fileByteSize / 1024, 2) . '</p>';
 } else {
      $listResult = '<p>Dir nothing or not read.</p>';
 }
@@ -63,7 +60,6 @@ $listResult = '<table class="table table-bordered">'
     </head>
     <body>
         <?php
-        echo $totalFileSize;
         echo $listResult;
         ?>
     </body>
