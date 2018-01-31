@@ -12,11 +12,11 @@ $listResult = '<table class="table table-bordered">'
     $images = scandir($dirPath);
     foreach ($images as $key => $val) {
         $fullPath = $dirPath . '/' . $val;
-        if (file_exists($fullPath) && exif_imagetype($fullPath)) {
+        if (file_exists($fullPath) && @exif_imagetype($fullPath)) {
             $imageInfo = getimagesize($fullPath);
             $fileByteSize = filesize($fullPath);
             $listResult .= '<tr>';
-            $listResult .= '<td class="thumbnail"><img src = "' . $fullPath . '" alt="' . $val . '"></td>';
+            $listResult .= '<td class="thumbnail"><a href="' . $fullPath . '" download="' . $val . '"><img src = "' . $fullPath . '" alt="' . $val . '"></td>';
             $listResult .= '<td class="file-name">'. $val . '</td>';
             $listResult .= '<td class="image-size">'. $imageInfo[0] . ' x ' . $imageInfo[1] . '</td>';
             $listResult .= '<td class="file-size">'. number_format($fileByteSize / 1024, 2) . 'KB</td>';
@@ -55,6 +55,9 @@ $listResult = '<table class="table table-bordered">'
             .thumbnail img {
                 width: 50px;
                 height: auto;
+            }
+            .thumbnail {
+                background-color: #F5F5F5;
             }
         </style>
     </head>
