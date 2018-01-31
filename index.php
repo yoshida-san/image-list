@@ -1,6 +1,6 @@
 
 <?php
-$dirPath = './images';
+$dirPath = './';
 $listResult = '';
 if (is_readable($dirPath) && is_dir($dirPath)) {
 $listResult = '';
